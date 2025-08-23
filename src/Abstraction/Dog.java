@@ -1,0 +1,5 @@
+package Abstraction;
+
+class Dog {
+
+}
