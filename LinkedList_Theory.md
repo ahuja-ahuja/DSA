@@ -48,3 +48,111 @@ class Node{
 - merging two sorted linkedlist is faster then arraylist
 - implementation of simple memory manager where we need to link free blocks 
 - easier implementation of queue and deque then arraylist 
+
+
+# LinkedList Traversal
+```java
+    public static void traversal(Node head) {
+        Node curr = head;
+        while (curr != null) {
+            System.out.println(curr.data);
+            curr = curr.nextNode;
+        }
+    }
+
+    public static void recursiveTraversalSinglyLL(Node head) {
+        //note always check head condititon for null not on head.nextNode , otherwise you will lose the last element
+        if (!(head == null)) {
+            System.out.println(head.data);
+            recursiveTraversal(head.nextNode);
+        }
+    }
+
+public static Node insertionBeginningSinglyLL(Node head, int n){
+        Node tmp = new Node(n);
+        tmp.nextNode = head;
+        return tmp;
+        }
+
+public static Node insertionEndSinglyLL(Node head, int n) {
+        Node tmp = new Node(n);
+        if (head == null) {
+        head = tmp;
+        }
+        Node curr = head;
+
+        //go to the end node
+        while (curr.nextNode != null) {
+        curr = curr.nextNode;
+        }
+        curr.nextNode = tmp;
+        tmp.nextNode = null;
+        return head;
+        }
+        
+        // good question below 
+
+public static Node insertionAtPosition(Node head, int pos, int n) {
+        Node tmp = new Node(n);
+
+        //if we just have
+        if(head.nextNode == null){
+        head.nextNode = tmp;
+        }
+        Node curr = head;
+        //go to the end node
+        for (int i = 0; i < pos-2 && curr !=null; i++) {
+        curr = curr.nextNode;
+        if(curr==null){
+        return head;
+        }
+        }
+        tmp.nextNode = curr.nextNode;
+        curr.nextNode = tmp;
+        return head;
+        }
+```
+
+## Deleting 
+```java
+
+    public static Node deleteFirstNode(Node head) {
+        //if there's only one head node then head.nextNode would be null returned
+        if (head == null) {
+            return null;
+        }
+        return head.nextNode;
+
+    }
+
+    public static Node deleteLastNode(Node head) {
+        if (head == null || head.nextNode == null) {
+            return null;
+        }
+        Node curr = head;
+        while (curr.nextNode.nextNode != null) { // you need to stop at the 2nd last node
+            curr = curr.nextNode;
+        }
+        curr.nextNode = null;
+
+        return head;
+
+    }
+    
+    
+    //Searching in LL 
+
+    public static int searchLinkedListPosition(Node head, int x){
+            int position = 1;
+            Node curr = head; // always use a temp Node 
+            while (curr != null){  // always remeebr to use curr != null not curr.nextNode != null
+            if(curr.data == x)
+            return position;
+            curr = curr.nextNode;
+            position++;
+            }
+            return -1;
+
+            }
+```
+
